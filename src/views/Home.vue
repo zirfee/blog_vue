@@ -1,18 +1,33 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <slide_nav></slide_nav>
+
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+  import slide_nav from "../components/slide_nav"
 
 export default {
   name: 'home',
-  components: {
-    HelloWorld
+  data(){
+    return {
+
+
+    }
+  },
+  methods: {
+
+  },
+  components:{
+      slide_nav
   }
 }
 </script>
+<style scoped>
+  .home{
+    width: 100%;
+    background-color: aqua;
+  }
+
+</style>
