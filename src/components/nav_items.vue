@@ -3,7 +3,7 @@
         <div class="nav_item"><router-link to="/index">首页</router-link></div>
         <div class="nav_item"><router-link to="/articles">文章</router-link></div>
         <div class="nav_item"><router-link to="/leaveMessage">留言</router-link></div>
-        <div class="nav_item"><router-link to="/articles">其他</router-link></div>
+        <div class="nav_item"><router-link to="/articles">测试</router-link></div>
     </div>
 </template>
 
