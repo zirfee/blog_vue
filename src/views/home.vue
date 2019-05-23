@@ -55,7 +55,7 @@ import nav_items from "../components/nav_items"
         margin-top: 30px;
     }
     .main_body{
-        width: 90%;
+        width: 86%;
         margin: 0 auto;
         height: 1000px;
         background-color: aquamarine;
