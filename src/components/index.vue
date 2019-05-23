@@ -1,6 +1,7 @@
 <template>
     <div class="index">
      <pictures_container></pictures_container>
+        <div></div>
     </div>
 </template>
 

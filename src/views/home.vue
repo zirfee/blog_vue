@@ -41,18 +41,22 @@ import nav_items from "../components/nav_items"
 <style scoped>
 
 .nav{
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top:0;
     width: 100%;
     background-color: black;
 }
 .nav_body{
-    width: 90%;
+    width: 86%;
     height: 50px;
     margin: 0 auto;
     background-color: aqua;
 }
     .main{
         width: 100%;
-        margin-top: 30px;
+        margin-top: 80px;
     }
     .main_body{
         width: 86%;

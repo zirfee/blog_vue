@@ -8,7 +8,6 @@
             <div v-for="(num,index) in this.pictures.length" :class="['dots',index===count?'dots_change':'']"  :key="index" @mouseover="count=index"></div>
         </div>
         </div>
-        <div style="z-index: 3;position: absolute">{{this.count}}</div>
     </div>
 
 </template>
@@ -78,12 +77,11 @@
    .dots_container{
        position: absolute;
        width: 40%;
-       z-index: 2;
        left: 30%;
        bottom: 10%;
    }
    .dots_bar{
-       width: 70%;
+       width: 80%;
        margin: 0 auto;
    }
    .dots{
