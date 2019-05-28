@@ -4,6 +4,7 @@ import home from './views/home'
 import  index from "./components/index"
 import articles from "./components/articles"
 import leaveMessage from "./components/LeaveMessage"
+import article_details from "./components/article_details"
 Vue.use(Router)
 
 export default new Router({
@@ -27,6 +28,10 @@ export default new Router({
         {
           path:"leaveMessage",
           component:leaveMessage
+        },
+        {
+          path:"article_details",
+          component:article_details
         }
 
       ]

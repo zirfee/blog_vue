@@ -26,9 +26,6 @@
                     require("../assets/4.jpg"),
                     require("../assets/5.jpg")
                 ],
-                worlds:[
-
-                ],
                 timer:null
             }
         },
