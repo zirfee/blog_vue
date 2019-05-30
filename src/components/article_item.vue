@@ -1,6 +1,7 @@
 <template>
     <div class="article_item">
          <router-link to="/article_details">{{title}}</router-link>
+        {{id}}{{describe}}
     </div>
 </template>
 
@@ -10,7 +11,7 @@
         props:[
             "id",
             "title",
-            "content"
+            "describe"
         ]
     }
 </script>

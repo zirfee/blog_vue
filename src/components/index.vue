@@ -5,7 +5,10 @@
         </div>
        <!-- <button @click="sub">124314</button>-->
         <div class="article_items">
-             <article_item v-for="item in article_info" :title="item.title"  :id="item.id"></article_item>
+
+             <article_item v-for="(item,index) in articles_info" :key="index" :title="item.articleTitle"  :id="item[0]"
+             :describe="item.articleDescribe">
+             </article_item>
         </div>
 
 
@@ -19,7 +22,7 @@
         name: "index",
         data(){
             return{
-                article_info:null,
+                articles_info:null,
             }
         },
         components:{
@@ -39,7 +42,8 @@
              }*/
         },
         created() {
-            this.axios.get("/api/article/getAllArticlesProfile").then(resp=>console.log(JSON.stringify(resp.data.data)))
+            this.axios.get("/api/article/getAllArticlesProfile").then(resp=>this.articles_info=resp.data.data)
+           /* this.axios.get("/api/article/getArticle/1").then(resp=>console.log(JSON.stringify(resp.data.data)))*/
         }
     }
 </script>
