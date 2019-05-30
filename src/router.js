@@ -12,11 +12,8 @@ export default new Router({
     {
       path:"/",
       component:home,
+      redirect:"/index",
       children:[
-        {
-          path: "",
-          component: index
-        },
         {
           path: "index",
           component: index
@@ -30,8 +27,9 @@ export default new Router({
           component:leaveMessage
         },
         {
-          path:"article_details",
-          component:article_details
+          path:"article_details/:id",
+          component:article_details,
+          name:"articleDetails"
         }
 
       ]

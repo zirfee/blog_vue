@@ -4,7 +4,7 @@
         <div class="nav_item"><router-link to="/index">首页</router-link></div>
         <div class="nav_item"><router-link to="/articles">文章</router-link></div>
         <div class="nav_item"><router-link to="/leaveMessage">留言</router-link></div>
-        <div class="nav_item"><router-link to="/articles">测试</router-link></div>
+        <div class="nav_item"><router-link to="/article_details/2">测试</router-link></div>
           <div class="searchBox">
               <input type="search" placeholder="输入关键词">
               <div><img :src="searchIcon"></div>

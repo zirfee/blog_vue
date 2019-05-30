@@ -3,12 +3,9 @@
         <div class="pictures_turn">
             <pictures_container></pictures_container>
         </div>
-       <!-- <button @click="sub">124314</button>-->
-        <div class="article_items">
-
-             <article_item v-for="(item,index) in articles_info" :key="index" :title="item.articleTitle"  :id="item[0]"
-             :describe="item.articleDescribe">
-             </article_item>
+        <!--<button @click="sub">124314</button>-->
+        <div class="myArticles">
+             <article_items></article_items>
         </div>
 
 
@@ -17,33 +14,33 @@
 
 <script>
     import pictures_container from "./pictures_container"
-    import article_item from "./article_item"
+    import article_items from "./article_items"
     export default {
         name: "index",
         data(){
             return{
-                articles_info:null,
+
             }
         },
         components:{
             pictures_container,
-            article_item
+            article_items
         },
         methods:{
-             /*sub:function () {
+           /*  sub:function () {
                  let article={
-                     articleTitle:"测试文章1",
-                     articleContent:"这是文章1内容",
+                     articleTitle:"测试文章2",
+                     articleContent:"这是文章2内容",
                      articleDescribe:"测试文章",
-                     articleTags:["分类1"]
+                     articleTags:["主题一","主题二"]
                  }
                  this.axios.post("/api/article/addArticle",article)
                      .then((response)=>(console.log(JSON.stringify(response.data))))
              }*/
         },
         created() {
-            this.axios.get("/api/article/getAllArticlesProfile").then(resp=>this.articles_info=resp.data.data)
-           /* this.axios.get("/api/article/getArticle/1").then(resp=>console.log(JSON.stringify(resp.data.data)))*/
+
+           /* this.axios.get("/api/article/getArticle/2").then(resp=>console.log(JSON.stringify(resp.data.data)))*/
         }
     }
 </script>
@@ -57,7 +54,7 @@
     .pictures_turn{
         width: 100%;
     }
-    .article_items{
+    .myArticles{
         width: 100%;
         margin-top: 15px;
     }
