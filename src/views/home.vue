@@ -72,7 +72,6 @@ import slide_right from "@/components/slide_right"
         float: right;
         width: 30%;
         height: 600px;
-        background-color: deeppink;
     }
     .bottom{
         margin-top: 70px;
