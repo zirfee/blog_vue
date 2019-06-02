@@ -7,8 +7,8 @@
 
         <div class="main">
             <div class="main_body">
-              <div class="main_left"><keep-alive :include="['index']"><router-view></router-view></keep-alive></div>
-              <div class="main_right"><slide_right></slide_right></div>
+              <div class="main_left"><keep-alive :include="['index']"><router-view :key="$route.path"></router-view></keep-alive></div>
+              <div class="main_right"><slide_right></slide_right></div>           <!--  :key加上不同标识,参数变化依然刷新重绘-->
             </div>
         </div>
 

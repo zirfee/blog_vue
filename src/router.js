@@ -6,6 +6,7 @@ import articles from "./components/articles"
 import leaveMessage from "./components/LeaveMessage"
 import article_details from "./components/article_details"
 import other from "./components/other"
+import searchResult from "./components/searchResult"
 Vue.use(Router)
 
 export default new Router({
@@ -48,7 +49,17 @@ export default new Router({
           component:article_details,
           name:"articleDetails",
           meta:{
-            index:2
+            index:2,
+            index2:1
+          }
+        },
+        {
+          path:"search/:way/:key",
+          component:searchResult,
+          name:"articleResult",
+          meta:{
+            index:2,
+            index2:2
           }
         }
 

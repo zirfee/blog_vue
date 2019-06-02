@@ -1,14 +1,14 @@
 <template>
     <div class="article_details">
-        <div class="nav">
+       <!-- <div class="nav">
             <ul>
                 <li>当前位置:</li>
                 <li><router-link to="/index">首页</router-link>-></li>
                 <li><router-link to="/articles">文章</router-link>-></li>
                 <li><router-link to="#">{{this.title}}</router-link></li>
             </ul>
-        </div>
-
+        </div>-->
+       <nav_bar></nav_bar>
         <div class="article">
             <div class="title">{{title}}</div>
             <div class="tags"><div><img :src="tag"></div><div>{{tags}}</div></div>
@@ -31,6 +31,11 @@
                 <!--  v-highlightjs标记的盒子代码高亮-->
                 <!-- <code class="javascript"></code>--><!--代码放里面高亮-->
             </div>
+            <div class="like" @click="change()">
+                <div v-if="!isLike"><img :src="this.heart" ></div>
+                <div v-if="isLike"><img :src="this.heart_filled" ></div>
+                <div>喜欢</div>
+            </div>
         </div>
     </div>
 </template>
@@ -39,10 +44,12 @@
     import {dateFormat} from "@/static/jsUtils/dateFormat";
     import md from '@/static/md/docs/test.md'
     import 'highlight.js/styles/atom-one-dark.css'
+    import nav_bar from "./nav_bar"
     export default {
         name: "article_details",
         data(){
             return{
+                isLike:false,
                 title:"",
                 tags:"",
                 time:"",
@@ -55,13 +62,19 @@
                 comment:require("@/assets/comment.png"),
                 like:require("@/assets/like.png"),
                 clock:require("@/assets/clock.png"),
+                heart:require("@/assets/heart.png"),
+                heart_filled:require("@/assets/heart_filled.png")
             }
         },
         components:{
-           md
+           md,
+            nav_bar
         },
         methods:{
-          dateFormat
+          dateFormat,
+            change:function () {
+                this.isLike=!this.isLike
+            }
         },
         created() {
            let path= "/api/article/getArticle/"+this.$route.params.id
@@ -86,7 +99,7 @@
 .article_details{
     width: 100%;
 }
-.nav{
+/*.nav{
     padding-left: 1%;
     width: 99%;
     height: 35px;
@@ -105,7 +118,7 @@
    }
     .nav a:hover{
         color: darkorange;
-    }
+    }*/
     .article{
         padding-top: 30px;
         padding-bottom: 30px;
@@ -162,11 +175,30 @@
     }
     .content{
         width: 100%;
+        letter-spacing: 1px;
         font:400 16px/20px Arial,Helvetica,Tahoma,\\534E\6587\7EC6\9ED1,Microsoft YaHei,\\5FAE\8F6F\96C5\9ED1,sans-serif;
         color: #404040;
         margin-top: 20px;
         border-top: 1px solid #ccc;
         padding-top: 20px;
         font-size: 14px;
+        margin-bottom: 30px;
+    }
+    .like{
+        width: 30%;
+         margin: 0 auto;
+        transition: all 0.5s;
+    }
+    .like div{
+        font-size: 16px;
+        margin-left: 35%;
+
+    }
+    .like:hover{
+      transform: translateY(-10px);
+    }
+    .like img{
+        width: 30px;
+        height: 30px;
     }
 </style>

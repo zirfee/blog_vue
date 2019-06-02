@@ -47,10 +47,19 @@
                }
             }
         },
-        mounted() {
+        deactivated() {
+            clearInterval(this.timer)
+        },
+        activated() {
             this.timer=setInterval(() => (
                 this.count++
             ), 2500)
+        }
+        ,
+        mounted() {
+           /* this.timer=setInterval(() => (
+                this.count++
+            ), 2500)*/
         }
     }
 </script>

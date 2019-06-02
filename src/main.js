@@ -12,3 +12,6 @@ new Vue({
   router,
   render: function (h) { return h(App) }
 }).$mount('#app')
+/*
+<component :is="assembly"></component>*/
+//动态切换组件
