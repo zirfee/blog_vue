@@ -5,6 +5,7 @@ import  index from "./components/index"
 import articles from "./components/articles"
 import leaveMessage from "./components/LeaveMessage"
 import article_details from "./components/article_details"
+import other from "./components/other"
 Vue.use(Router)
 
 export default new Router({
@@ -16,20 +17,39 @@ export default new Router({
       children:[
         {
           path: "index",
-          component: index
+          component: index,
+          meta:{
+            index:1
+          }
         },
         {
           path:"articles",
-          component:articles
+          component:articles,
+          meta:{
+            index:2
+          }
         },
         {
           path:"leaveMessage",
-          component:leaveMessage
+          component:leaveMessage,
+          meta:{
+            index:3
+          }
+        },
+        {
+          path:"other",
+          component:other,
+          meta:{
+            index:4
+          }
         },
         {
           path:"article_details/:id",
           component:article_details,
-          name:"articleDetails"
+          name:"articleDetails",
+          meta:{
+            index:2
+          }
         }
 
       ]

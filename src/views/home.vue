@@ -7,8 +7,8 @@
 
         <div class="main">
             <div class="main_body">
-              <div class="main_left"><router-view></router-view></div>
-              <div class="main_right"></div>
+              <div class="main_left"><keep-alive :include="['index']"><router-view></router-view></keep-alive></div>
+              <div class="main_right"><slide_right></slide_right></div>
             </div>
         </div>
 
@@ -21,6 +21,7 @@
 
 <script>
 import nav_items from "../components/nav_items"
+import slide_right from "@/components/slide_right"
     export default {
         name: "home",
         data(){
@@ -32,7 +33,8 @@ import nav_items from "../components/nav_items"
 
         },
         components:{
-            nav_items
+            nav_items,
+            slide_right
         }
 
     }
@@ -46,29 +48,25 @@ import nav_items from "../components/nav_items"
     left: 0;
     top:0;
     width: 100%;
-    background-color: black;
+    background-color: rgba(0,0,0,0.9);
 }
 .nav_body{
     width: 86%;
     height: 50px;
     margin: 0 auto;
-    background-color: aqua;
 }
     .main{
         width: 100%;
         margin-top: 80px;
     }
     .main_body{
+        overflow: hidden;
         width: 86%;
         margin: 0 auto;
-        height: 1000px;
-        background-color: aquamarine;
     }
     .main_left{
         float: left;
         width: 67%;
-        height: 700px;
-        background-color: blue;
     }
     .main_right{
         float: right;

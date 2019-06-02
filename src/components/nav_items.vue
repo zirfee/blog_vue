@@ -1,10 +1,10 @@
 <template>
     <div class="nav_items">
-        <div class="nav_item"><img :src="logoUrl"></div>
-        <div class="nav_item"><router-link to="/index">首页</router-link></div>
-        <div class="nav_item"><router-link to="/articles">文章</router-link></div>
-        <div class="nav_item"><router-link to="/leaveMessage">留言</router-link></div>
-        <div class="nav_item"><router-link to="/article_details/2">测试</router-link></div>
+        <div class="logo"><img :src="logoUrl"></div>
+       <router-link to="/index"> <div :class="['nav_item',$route.meta.index==1?'nav_item_turn':'']">首页</div></router-link>
+        <router-link to="/articles"> <div :class="['nav_item',$route.meta.index==2?'nav_item_turn':'']">文章</div></router-link>
+        <router-link to="/leaveMessage"> <div :class="['nav_item',$route.meta.index==3?'nav_item_turn':'']">留言</div></router-link>
+        <router-link to="/other"><div :class="['nav_item',$route.meta.index==4?'nav_item_turn':'']">其他</div></router-link>
           <div class="searchBox">
               <input type="search" placeholder="输入关键词">
               <div><img :src="searchIcon"></div>
@@ -21,33 +21,50 @@
                 searchIcon:require("../assets/search.png")
             }
         }
+
+
     }
 </script>
 
 <style scoped>
 .nav_items {
-    height: 50px;
+    height: 46px;
     width: 100%;
 }
-    .nav_item{
-        float: left;
-        width: 6%;
-        height: 50px;
-        margin-right: 20px;
-        background-color: brown;
-        line-height: 50px;
-        text-align: center;
-    }
-    .nav_item img{
-        width: 100%;
-        height: 50px;
+.nav_item{
+    color: #eeeeee;
+    font-size: 18px;
+    border-bottom: 4px solid white;
+    float: left;
+    width: 4%;
+    height: 46px;
+    margin-right: 28px;
+    line-height: 46px;
+    text-align: center;
+}
+.nav_item:hover{
+    color: darkorange;
+    transform: scale(1.1);
+}
+.nav_item_turn{
+    color: darkorange;
+}
+.logo{
+    float: left;
+    width: 70px;
+    height: 46px;
+    margin-right: 30px;
+}
+
+    .logo img{
+        width: 70px;
+        height: 46px;
     }
     .searchBox{
         position: relative;
-        background-color: brown;
         float: right;
-        height: 50px;
-        line-height: 50px;
+        height: 46px;
+        line-height: 46px;
     }
 
     .searchBox input{
@@ -63,7 +80,7 @@
     }
     .searchBox div{
         position: absolute;
-        top: 0;
+        top: 30%;
         right: 10px;
     }
     .searchBox img{
