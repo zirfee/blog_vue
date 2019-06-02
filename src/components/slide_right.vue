@@ -7,7 +7,7 @@
         <div class=" slide_item_title"><div class="title">标签</div></div>
         <div class="slide_item_content"><div class="tags"><div class="tag" :style="'backgroundColor: #'+colors[index]" v-for="(item,index) in this.tags" :key="index"><router-link :to="{name:'articleResult',params:{way:'tag',key:item.tagTitle}}">{{item.tagTitle}}</router-link></div></div></div>
         <div class=" slide_item_title" ><div class="title">时间轴</div></div>
-        <div class="slide_item_content"><div class="content"> </div></div>
+        <div class="slide_item_content"><div class="content"><div class="time_item" v-for="(item,index) in time" :key="index"><router-link :to="{name:'articleResult',params:{way:'time',key:item[0]}}">{{item[0].slice(0,4)}}年{{item[0].slice(4,6)}}月({{item[1]}})</router-link></div> </div></div>
     </div>
 </template>
 
@@ -16,8 +16,9 @@
         name: "slide_right",
         data(){
             return{
-              articles_info:0,
+                articles_info:0,
                 tags:0,
+                time:[],
                 colors:['CC6699','336666','663300','9BBFEA','CCCC00','EA6F5A','31194D0','42C02E']
             }
         },
@@ -25,13 +26,18 @@
             this.axios.get("/api/article/getRecommend").then(
                 resp => {
                     this.articles_info = resp.data.data
-                    console.log(JSON.stringify(resp.data.data))
                 })
             this.axios.get("/api/tag/getAllTags").then(
                 resp => {
                     this.tags = resp.data.data
                    /* console.log(JSON.stringify(resp.data.data))*/
                 })
+            this.axios.get("/api/article/getArticlesTime").then(
+                resp=>{
+                    this.time=resp.data.data
+                    console.log(JSON.stringify(resp.data.data))
+                }
+            )
         }
     }
 </script>
@@ -41,7 +47,6 @@
         width: 100%;
         padding-top: 11px;
         background-color: #faf7f7;
-        height: 600px;
     }
    .slide_item_title{
        width: 100%;
@@ -95,10 +100,21 @@
         color: #eeeeee;
         float: left;
         margin-right: 20px;
-        height: 30px;
+        min-height: 30px;
         line-height: 30px;
         border-radius: 4px;
         padding: 3px 8px;
+    }
+    .tag a:visited{
+        color: #eeeeee;
+    }
+    .time_item{
+        padding-bottom: 8px;
+        text-align: center;
+        border-bottom: 0.5px solid #ccc;
+    }
+    .time_item a{
+        font-size: 19px;
     }
 
 </style>
