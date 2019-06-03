@@ -1,15 +1,28 @@
 <template>
-    <div class="leaveMessage">留言</div>
+    <div class="leaveMessage">
+        <nav_bar></nav_bar>
+
+    </div>
 </template>
 
 <script>
+    import nav_bar from "@/components/nav_bar"
     export default {
-        name: "LeaveMessage"
+        name: "LeaveMessage",
+    data(){
+            return{
+
+            }
+    },
+        components:{
+            nav_bar
+        }
     }
 </script>
 
 <style scoped>
-.leaveMessage{
-
+.leaveMessage {
+    width: 100%;
 }
+
 </style>

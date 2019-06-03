@@ -94,16 +94,19 @@
        width: 92%;
        padding-left: 4%;
        padding-right: 4%;
-        height: 80px;
+       min-height: 110px;
    }
     .tag{
         color: #eeeeee;
         float: left;
         margin-right: 20px;
-        min-height: 30px;
         line-height: 30px;
         border-radius: 4px;
         padding: 3px 8px;
+        margin-bottom: 10px;
+    }
+    .tag a{
+        color: #eeeeee;
     }
     .tag a:visited{
         color: #eeeeee;

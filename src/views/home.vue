@@ -13,7 +13,7 @@
         </div>
 
         <div class="bottom">
-            <div class="bottom_body"></div>
+            <div class="bottom_body"><div>Powered By Vue </div></div>
         </div>
 
     </div>
@@ -63,6 +63,7 @@ import slide_right from "@/components/slide_right"
         overflow: hidden;
         width: 86%;
         margin: 0 auto;
+        min-height: 1200px;
     }
     .main_left{
         float: left;
@@ -76,12 +77,21 @@ import slide_right from "@/components/slide_right"
     .bottom{
         margin-top: 70px;
         width: 100%;
-        background-color: brown;
+        background-color:#2E3033;
     }
     .bottom_body{
         width: 90%;
         margin: 0 auto;
-        height: 70px;
-        background-color:coral;
+        height: 90px;
     }
+.bottom_body div{
+    color: #eeeeee;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    height: 90px;
+    line-height: 90px;
+    width: 200px;
+    margin: 0 auto;
+}
 </style>

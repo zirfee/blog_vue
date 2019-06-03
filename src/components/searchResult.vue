@@ -60,8 +60,6 @@
                 return dateFormat(date)
             }
         },
-        watch:{
-        },
         components:{
             nav_bar
         },
@@ -80,7 +78,6 @@
                 this.axios.get("/api/article/getArticleByTime/"+key).then(
                     resp=>{
                         this.articles=resp.data.data
-                        console.log(JSON.stringify(resp.data.data))
                     }
                 )
             }
