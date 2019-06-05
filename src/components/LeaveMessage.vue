@@ -9,7 +9,17 @@
              </div>
               <div class="messages">
                    <div class="t2">所有留言</div>
-                  <div class="all_message">这是留言</div>
+                  <div class="all_message">
+                      <div class="message_item">
+                          <div class="img"><img :src="visitor_head"></div>
+                          <div class="border_img"><img :src="border"></div>
+                          <div class="message_content">
+                              <div class="nickname">{{message_info[0].visitorName}}<span style="font-weight: bold">:</span></div>
+                              &nbsp&nbsp&nbsp&nbsp{{message_info[0].messageContent}}
+                              <div class="time">{{dateFormat(new Date(message_info[0].messageTime))}}</div>
+                          </div>
+                      </div>
+                  </div>
               </div>
         </div>
     </div>
@@ -17,12 +27,17 @@
 
 <script>
     import nav_bar from "@/components/nav_bar"
+    import {dateFormat} from "@/static/jsUtils/dateFormat";
+
     export default {
         name: "LeaveMessage",
        data(){
             return{
                 message:"",
-                smile:require("@/assets/smile.png")
+                message_info:0,
+                smile:require("@/assets/smile.png"),
+                visitor_head:require("@/assets/visitor.png"),
+                border:require("@/assets/message_border.png")
             }
        },
         methods:{
@@ -35,7 +50,8 @@
                         console.log("提交成功")
                     }
                 )
-            }
+            },
+           dateFormat
         },
         components:{
             nav_bar
@@ -43,7 +59,7 @@
         created() {
           this.axios.get("/api/message/getMessages").then(
               resp=>{
-                  console.log(JSON.stringify(resp.data.data))
+                 this.message_info=resp.data.data
               }
           )
         }
@@ -140,7 +156,42 @@
 }
     .all_message{
         width: 100%;
-        min-height: 100px;
-        background-color: coral;
+        min-height: 90px;
+    }
+    .message_item{
+        width: 100%;
+        height: 100px;
+    }
+    .img{
+        float: left;
+        width: 6%;
+        height: 100px;
+        text-align: center;
+    }
+    .img img{
+        margin-top: 30px;
+        width: 40px;
+        height: 40px;
+    }
+    .border_img{
+        position: relative;
+        float: left;
+        margin-top: 35px;
+        background-color: #faf7f7;
+        margin-right: -8px;
+    }
+    .border_img img{
+        width: 40px;
+        height: 30px;
+    }
+    .message_content{
+        float: left;
+        padding: 10px;
+        width: 80%;
+        height: 70px;
+        margin-top: 5px;
+        border:1px solid #647155;
+        border-radius: 8px;
+        box-shadow:0px 0px  5px  #2E3033;
     }
 </style>

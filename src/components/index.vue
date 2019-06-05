@@ -14,7 +14,7 @@
 
                     <div class="article_time">
                         <div class="article_time_img"><img :src="clock"></div>
-                        <div class="article_time_item">{{dateFormatToMinutes(new Date(item.articleTime))}}</div>
+                        <div class="article_time_item">{{dateFormat(new Date(item.articleTime))}}</div>
                     </div>
 
                     <div class="article_describe">
@@ -66,9 +66,8 @@
             pictures_container,
         },
         methods:{
-            dateFormatToMinutes:function (date) {
-                return dateFormat(date)
-            }
+
+              dateFormat
            /*  sub:function () {
                  let article={
                      articleTitle:"测试文章2",
