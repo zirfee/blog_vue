@@ -10,13 +10,13 @@
               <div class="messages">
                    <div class="t2">所有留言</div>
                   <div class="all_message">
-                      <div class="message_item">
+                      <div class="message_item" v-for="(item,index) in message_info" :key="index">
                           <div class="img"><img :src="visitor_head"></div>
                           <div class="border_img"><img :src="border"></div>
                           <div class="message_content">
-                              <div class="nickname">{{message_info[0].visitorName}}<span style="font-weight: bold">:</span></div>
-                              &nbsp&nbsp&nbsp&nbsp{{message_info[0].messageContent}}
-                              <div class="time">{{dateFormat(new Date(message_info[0].messageTime))}}</div>
+                              <div class="nickname">{{item.visitorName}}<span style="font-weight: bold">:</span></div>
+                              &nbsp&nbsp&nbsp&nbsp{{item.messageContent}}
+                              <div class="time"><img :src="clock">{{dateFormat(new Date(item.messageTime))}}</div>
                           </div>
                       </div>
                   </div>
@@ -37,7 +37,8 @@
                 message_info:0,
                 smile:require("@/assets/smile.png"),
                 visitor_head:require("@/assets/visitor.png"),
-                border:require("@/assets/message_border.png")
+                border:require("@/assets/message_border.png"),
+                clock:require("@/assets/clock.png")
             }
        },
         methods:{
@@ -161,6 +162,7 @@
     .message_item{
         width: 100%;
         height: 100px;
+        margin-bottom: 10px;
     }
     .img{
         float: left;
@@ -175,6 +177,7 @@
     }
     .border_img{
         position: relative;
+        z-index: 1;
         float: left;
         margin-top: 35px;
         background-color: #faf7f7;
@@ -186,12 +189,22 @@
     }
     .message_content{
         float: left;
+        position: relative;
         padding: 10px;
-        width: 80%;
+        width: 85%;
         height: 70px;
         margin-top: 5px;
         border:1px solid #647155;
         border-radius: 8px;
         box-shadow:0px 0px  5px  #2E3033;
+    }
+    .time{
+        position: absolute;
+        right: 10px;
+        bottom: 0px;
+    }
+    .time img{
+        width: 18px;
+        height: 18px;
     }
 </style>

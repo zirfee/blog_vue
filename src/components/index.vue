@@ -83,7 +83,6 @@
             this.axios.get("/api/article/getAllArticlesProfile").then(
                     resp => {
                         this.articles_info = resp.data.data
-                        console.log(JSON.stringify(resp.data.data))
                     })
 
            /* this.axios.get("/api/article/getArticle/2").then(resp=>console.log(JSON.stringify(resp.data.data)))*/
