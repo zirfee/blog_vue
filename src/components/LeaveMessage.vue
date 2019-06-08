@@ -1,10 +1,11 @@
 <template>
     <div class="leaveMessage">
         <nav_bar></nav_bar>
+        <login v-show="isShow" @changeIsShow="changeIs"></login>
         <div class="content">
              <div class="leave">
                  <div class="t">我要留言:</div>
-                 <div class="textArea"><textarea v-model="message"></textarea></div>
+                 <div class="textArea"><textarea v-model="message" @focus="checkIsLogin"></textarea></div>
                  <div class="submit"><div class="emoji"><img :src="smile"></div><button @click="submit">提交</button></div>
              </div>
               <div class="messages">
@@ -27,12 +28,14 @@
 
 <script>
     import nav_bar from "@/components/nav_bar"
+    import login from "@/components/login"
     import {dateFormat} from "@/static/jsUtils/dateFormat";
 
     export default {
         name: "LeaveMessage",
        data(){
             return{
+                isShow:false,
                 message:"",
                 message_info:0,
                 smile:require("@/assets/smile.png"),
@@ -43,19 +46,33 @@
        },
         methods:{
             submit:function () {
-                  let  messageJson=new Object()
-                    messageJson.visitorId=2
-                    messageJson.content=this.message
-                this.axios.post("/api/message/sendMessage",messageJson).then(
-                    resp=>{
-                        console.log("提交成功")
-                    }
-                )
+                if(localStorage.getItem("id")) {
+                    let messageJson = new Object()
+                    messageJson.visitorId = localStorage.getItem("id")
+                    messageJson.content = this.message
+                    this.axios.defaults.headers.common['token'] = localStorage.getItem('token')
+                    this.axios.post("/api/message/sendMessage", messageJson).then(
+                        resp => {
+                           location.reload()
+                        }
+                    )
+                }else {
+                    this.isShow=true
+                }
             },
-           dateFormat
+           dateFormat,
+            checkIsLogin:function () {
+                if(!localStorage.token){
+                    this.isShow=true
+                }
+            },
+            changeIs:function () {
+                this.isShow=!this.isShow
+            }
         },
         components:{
-            nav_bar
+            nav_bar,
+            login
         },
         created() {
           this.axios.get("/api/message/getMessages").then(

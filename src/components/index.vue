@@ -84,7 +84,6 @@
                     resp => {
                         this.articles_info = resp.data.data
                     })
-
            /* this.axios.get("/api/article/getArticle/2").then(resp=>console.log(JSON.stringify(resp.data.data)))*/
         }/*,
         beforeRouteEnter(to,from,next){

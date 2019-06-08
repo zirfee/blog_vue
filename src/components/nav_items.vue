@@ -9,6 +9,7 @@
               <input type="search" placeholder="输入关键词">
               <div><img :src="searchIcon"></div>
           </div>
+        <div v-show="isShow"><div style="color: #eeeeee">{{nickName}}</div><button @click="exit">退出</button></div>
     </div>
 </template>
 
@@ -18,7 +19,25 @@
         data(){
             return{
                 logoUrl:require("../assets/logo.png"),
-                searchIcon:require("../assets/search.png")
+                searchIcon:require("../assets/search.png"),
+                isShow:localStorage.getItem('token'),
+                nickName:""
+            }
+        },
+        methods:{
+            exit:function () {
+                localStorage.removeItem("token")
+                localStorage.removeItem("id")
+                location.reload()
+            }
+        },
+        created() {
+            if (this.isShow) {
+                this.axios.get("/api/visitor/getVisitorById/"+localStorage.getItem("id")).then(
+                    resp=>{
+                        this.nickName=resp.data.data.nickName
+                    }
+                )
             }
         }
 
