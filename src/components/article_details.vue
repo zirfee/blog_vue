@@ -18,7 +18,7 @@
                     <div><img :src="watch"></div>
                     <div>{{readTimes}}</div>
                     <div>次阅读</div>
-                    <div><img :src="comment"></div>
+                    <div><img :src="commentPic"></div>
                     <div>{{commentTimes}}</div>
                     <div>条评论</div>
                     <div><img :src="like"></div>
@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="content"  v-highlightjs>
-               <md></md>
+               <comment :is="who"></comment>
                 <!--  v-highlightjs标记的盒子代码高亮-->
                 <!-- <code class="javascript"></code>--><!--代码放里面高亮-->
             </div>
@@ -38,38 +38,32 @@
             </div>
         </div>
         <div class="comment">
+            <login v-show="isShow" @changeIsShow="changeIs"></login>
             <div class="leave">
                 <div class="t">我要评论:</div>
-                <div class="textArea"><textarea v-model="comment_content"></textarea></div>
+                <div class="textArea"><textarea v-model="comment_content" @focus="checkIsLogin"></textarea></div>
                 <div class="submit"><div class="emoji"><img :src="smile"></div><button @click="submit">提交</button></div>
             </div>
-            <div class="messages">
-                <div class="t2">所有评论</div>
-                <div class="all_message">
-                    <div class="message_item" v-for="(item,index) in comments" :key="index">
-                        <div class="img"><img :src="visitor_head"></div>
-                        <div class="border_img"><img :src="border"></div>
-                        <div class="message_content">
-                            <div class="nickname">{{item.visitorNickname}}<span style="font-weight: bold">:</span></div>
-                            &nbsp&nbsp&nbsp&nbsp{{item.commentContent}}
-                            <div class="time"><img :src="clock">{{dateFormat(new Date(item.commentTime))}}</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           <comment :key="this.add"></comment>
         </div>
     </div>
 </template>
 
 <script>
     import {dateFormat} from "@/static/jsUtils/dateFormat";
-    import md from '@/static/md/docs/test.md'
+    import note2 from '@/static/md/docs/note2.md'
+    import note1 from '@/static/md/docs/note1.md'
     import 'highlight.js/styles/atom-one-dark.css'
     import nav_bar from "./nav_bar"
+    import login from "@/components/login"
+    import comment  from "@/components/commentItem"
     export default {
         name: "article_details",
         data(){
             return{
+                who:"",
+                add:0,
+                isShow:false,
                 isLike:false,
                 articleId:"",
                 title:"",
@@ -80,41 +74,57 @@
                 likeTimes:"",
                 articleContent:"",
                 comment_content:"",
-                comments:0,
                 tag:require("@/assets/tag.png"),
                 watch:require("@/assets/watch.png"),
-                comment:require("@/assets/comment.png"),
+                commentPic:require("@/assets/comment.png"),
                 like:require("@/assets/like.png"),
-                clock:require("@/assets/clock.png"),
                 heart:require("@/assets/heart.png"),
                 heart_filled:require("@/assets/heart_filled.png"),
                 smile:require("@/assets/smile.png"),
-                border:require("@/assets/message_border.png"),
-                visitor_head:require("@/assets/visitor.png")
+                clock:require("@/assets/clock.png")
             }
         },
         components:{
-           md,
-            nav_bar
+            "note1":note1,
+           "note2":note2,
+            nav_bar,
+            login,
+            comment
         },
         methods:{
           dateFormat,
             change:function () {
-                this.isLike=!this.isLike
+                this.isLike=true
+                this.axios.get("/api/article/addArticleLikeTimes?articleId="+this.$route.params.id)
             },
             submit:function () {
-                let content=this.comment_content
-               let jsonOb = new Object()
-                  jsonOb.content=content
-                this.axios.post("/api/comment/addComment?articleId="+this.$route.params.id+"&visitorId="+1,jsonOb).then(
-                     resp=>{
-                         console.log("success")
-                     }
-                )
+              if(localStorage.getItem("id")) {
+                  let content = this.comment_content
+                  let jsonOb = new Object()
+                  jsonOb.content = content
+                  this.axios.defaults.headers.common['token'] = localStorage.getItem('token')
+                  this.axios.post("/api/comment/addComment?articleId=" + this.$route.params.id + "&visitorId=" + localStorage.getItem("id"), jsonOb).then(
+                      resp => {
+                          this.axios.get("/api/article/addArticleCommentTimes?articleId="+this.$route.params.id)
+                         this.add++
+                      }
+                  )
+              }else {
+                  this.isShow=true
+              }
+            },
+            changeIs:function () {
+                this.isShow=!this.isShow
+            },
+            checkIsLogin:function () {
+                if(!localStorage.token){
+                    this.isShow=true
+                }
             }
         },
         created() {
            let path= "/api/article/getArticle/"+this.$route.params.id
+            this.who="note"+this.$route.params.id
             this.axios.get(path).then(
                 resp=> {
                     let article=resp.data.data
@@ -129,12 +139,8 @@
 
                 }
             )
-            let commentApi= "/api/comment/getArticleComments/"+this.$route.params.id
-              this.axios.get(commentApi).then(
-                  resp=>{
-                     this.comments= resp.data.data
-                  }
-              )
+            this.axios.get("/api/article/addArticleReadTimes?articleId="+this.$route.params.id)
+
         }
     }
 </script>
@@ -307,56 +313,5 @@
     text-align: center;
     color: #eeeeee;
 }
-.all_message{
-    width: 100%;
-    min-height: 90px;
-}
-.message_item{
-    width: 100%;
-    height: 100px;
-    margin-bottom: 10px;
-}
-.img{
-    float: left;
-    width: 6%;
-    height: 100px;
-    text-align: center;
-}
-.img img{
-    margin-top: 30px;
-    width: 40px;
-    height: 40px;
-}
-.border_img{
-    position: relative;
-    z-index: 1;
-    float: left;
-    margin-top: 35px;
-    background-color: #faf7f7;
-    margin-right: -8px;
-}
-.border_img img{
-    width: 40px;
-    height: 30px;
-}
-.message_content{
-    float: left;
-    position: relative;
-    padding: 10px;
-    width: 85%;
-    height: 70px;
-    margin-top: 5px;
-    border:1px solid #647155;
-    border-radius: 8px;
-    box-shadow:0px 0px  5px  #2E3033;
-}
-.time{
-    position: absolute;
-    right: 10px;
-    bottom: 0px;
-}
-.time img{
-    width: 18px;
-    height: 18px;
-}
+
 </style>

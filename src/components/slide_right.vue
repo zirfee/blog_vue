@@ -1,6 +1,6 @@
 <template>
     <div class="slide_right">
-        <div class="slide_item_title"><div class="title">关于本站</div></div>
+        <div class="slide_item_title"><div class="title">关于</div></div>
         <div class="slide_item_content"><div class="content"><p>&nbsp&nbsp&nbsp本站是用于知识分享的个人博客, 技术栈为vue全家桶, nodeJs环境, html, css, js, axios, 后端为spring全家桶, 数据库采用 mysql. 实现文章发布及评论分享, 并设置留言功能. 源码在<a href="https://github.com/zirfee/blog_vue.git">github</a></p></div></div>
         <div class=" slide_item_title"><div class="title">推荐</div></div>
         <div class="slide_item_content"><div  class="content recommend" v-for="(item,index) in articles_info" :key="index" ><router-link :to="{name:'articleDetails',params:{id:item.articleId}}">{{index+1}}:&nbsp&nbsp&nbsp&nbsp{{item.articleTitle}}</router-link></div></div>

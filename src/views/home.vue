@@ -41,6 +41,9 @@ import slide_right from "@/components/slide_right"
 </script>
 
 <style scoped>
+    .home{
+
+    }
 
 .nav{
     position: fixed;

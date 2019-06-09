@@ -9,7 +9,7 @@
               <input type="search" placeholder="输入关键词">
               <div><img :src="searchIcon"></div>
           </div>
-        <div v-show="isShow"><div style="color: #eeeeee">{{nickName}}</div><button @click="exit">退出</button></div>
+        <div v-show="isShow"><div style="color: #eeeeee">{{nickName}}</div><button @click="exit" style="height: 20px;font-size: 15px;line-height: 20px">退出</button></div>
     </div>
 </template>
 
